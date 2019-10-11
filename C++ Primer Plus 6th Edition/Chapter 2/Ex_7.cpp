@@ -29,5 +29,5 @@ int main(void){
 }
 
 void PrintTime(int hours,  int minutes){
-    std::cout << hours << ":" << minutes << std::endl;
+    std::cout << "Time: " << hours << ":" << minutes << std::endl;
 }
