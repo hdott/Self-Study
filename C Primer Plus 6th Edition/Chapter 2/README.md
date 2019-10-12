@@ -13,7 +13,7 @@
         For he's a jolly good fellow!
         For he's a jolly good fellow!
         Which nobody can deny!
-    ```
+    ``` 
     > Have the program use two user-defined functionsin addition to main(): one names jolly() that prints the "jolly good" message once, and one named deny() that prints the final line once.
 - [Ex_5](./Ex_5.c)
     > Write a program that produces the following output:
