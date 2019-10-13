@@ -1,4 +1,4 @@
-## Chapter 3
+## Chapter 4
 
 - [Ex_1](./Ex_1.c)
     > Write a program that asks for your first name, your last name, and then prints the names in the format last, first.
