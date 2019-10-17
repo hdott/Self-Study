@@ -35,7 +35,6 @@ int main(void){
         printf("1) $8.75/hr\t\t\t2) $9.33/hr\n3) $10.00/hr\t\t\t4) $11.20/hr\n5) quit\n");
         printf("*****************************************************************\n");
 
-        int option;
         scanf("%d", &option);
         switch(option){
             case 1:
