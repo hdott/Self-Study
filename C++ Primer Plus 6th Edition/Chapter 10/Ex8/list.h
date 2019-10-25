@@ -1,23 +1,29 @@
 #pragma once
+#ifndef LIST_H
+#define LIST_H
 #include <iostream>
 
-template <typename T>
+
+template <typename C>
 struct item{
-    T it;
+    C it;
     struct item *next;
 };
 
 template<class C>
 class List{
     private:
+        enum {MAX=10};
         item<C> *node;
-        void printNode(item<C> &it) const;
+        static int index;
         
     public:
-        List(item *node = NULL): node(node){};
+        List(item<C> *node = NULL): node(node){};
 
-        void add(item *node);
+        void add(item<C> *node);
         bool isEmpty();
         bool isFull();
-        void visit(void (*pf)(item<C> &it));
+        void visit(void (*pf)(const item<C> &it));
+        static void printNode(const item<C> &it);
 };
+#endif
