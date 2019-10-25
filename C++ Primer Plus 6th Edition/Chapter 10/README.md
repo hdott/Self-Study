@@ -1,8 +1,8 @@
 ## Chapter 10
 
-- [Ex_1](./Ex_1)
+- [Ex_1](./Ex1)
     > Provide method definitions for the class described in Chapter Review Question 5 and write a short program that illustrates all the features.
-- [Ex_2](./Ex_2)
+- [Ex_2](./Ex2)
     > Here is a rather simple class definition:
     ```
         class Person {
@@ -30,11 +30,11 @@
         one.FormalShow();
         // etc. for two and three
     ```
-- [Ex_3](./Ex_3)
+- [Ex_3](./Ex3)
     > Do Programming Exercise 1 from Chapter 9 but replace the code shown there withan appropriate golf class declaration. Replace setgolf(golf &, const char*, int) with a constructor with the appropriate argument for providing initial values. Retain the interactive version of setgolf() but implement it by using the constructor. (For example, for the code for setgolf() , obtain the data, pass the data to the constructor to create a temporary object, and assign the temporary object to the invoking object, which is *this .)
-- [Ex_4](./Ex_4)
+- [Ex_4](./Ex4)
     > Do Programming Exercise 4 from Chapter 9 but convert the Sales structure and its associated functions to a class and its methods. Replace the setSales(Sales &, double [], int) function with a constructor. Implement the interactive setSales(Sales &) method by using the constructor. Keep the class within the namespace SALES .
-- [Ex_5](./Ex_5)
+- [Ex_5](./Ex5)
     > Consider the following structure declaration:
     ```   
         struct customer {
@@ -43,7 +43,7 @@
         };
     ```
     > Write a program that adds and removes customer structures from a stack, represented by a Stack class declaration. Each time a customer is removed, his or her payment should be added to a running total, and the running total should be reported. Note: You should be able to use the Stack class unaltered; just change the typedef declaration so that Item is type customer instead of unsigned long .
-- [Ex_6](./Ex_6)
+- [Ex_6](./Ex6)
     > Here’s a class declaration:
     ```
         class Move
@@ -64,7 +64,7 @@
         };
     ```
     > Create member function definitions and a program that exercises the class.
-- [Ex_7](./Ex_7)
+- [Ex_7](./Ex7)
     > A Betelgeusean plorg has these properties:
     >   - Data
     >       - A plorg has a name with no more than 19 letters.
@@ -75,7 +75,7 @@
     >       - A plorg can report its name and CI.
     >       -The default plorg has the name "Plorga" .
     > Write a Plorg class declaration (including data members and member function prototypes) that represents a plorg.Write the function definitions for the member functions.Write a short program that demonstrates all the features of the Plorg class.
-- [Ex_8](./Ex_8)
+- [Ex_8](./Ex8)
     > You can describe a simple list as follows:
     >   - The simple list can hold zero or more items of some particular type.
     >   - You can create an empty list.
