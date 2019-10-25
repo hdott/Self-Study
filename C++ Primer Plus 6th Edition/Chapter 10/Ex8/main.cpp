@@ -7,13 +7,13 @@ int main(void){
 
     ls.add(new item<int>{1, NULL});
 
-    // ls.visit(ls.printNode);
+    ls.visit(ls.printNode);
     
-    // for(int i=2; !ls.isFull(); ++i){
-    //     ls.add(new item<int>{i, NULL});
-    // }
+    for(int i=2; !ls.isFull(); ++i){
+        ls.add(new item<int>{i, NULL});
+    }
 
-    // ls.visit(ls.printNode);
+    ls.visit(ls.printNode);
 
 
     return 0;

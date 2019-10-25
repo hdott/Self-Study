@@ -19,6 +19,7 @@ class List{
         
     public:
         List(item<C> *node = NULL): node(node){};
+        ~List();
 
         void add(item<C> *node);
         bool isEmpty();
