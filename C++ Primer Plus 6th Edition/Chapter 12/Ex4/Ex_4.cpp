@@ -32,3 +32,32 @@
         assignment operator.
 */
 
+#include <iostream>
+#include "stack.h"
+
+
+int main(void){
+    Stack st(11),
+            sta;
+    
+    Item i = 1;
+    while(!st.isfull()){
+        st.push(i += i);
+    }
+    
+    sta = st;
+    Stack stk(sta);
+    Item _tmp;
+    while(!sta.isempty()){
+        sta.pop(_tmp);
+        std::cout << _tmp << std::endl;
+    }
+
+    while(!stk.isempty()){
+        stk.pop(_tmp);
+        std::cout << _tmp << std::endl;
+    }
+
+
+    return 0;
+}
