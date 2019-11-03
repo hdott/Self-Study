@@ -66,7 +66,8 @@ int main()
                 cin.getline(str, 100);
                 cout << "Enter rating: ";
                 (cin >> rating).get();
-                arr[i++] = new baseDMA(str, rating);
+                arr[i] = new baseDMA[1];
+                *arr[i++] = baseDMA(str, rating);
                 break;
             case 2:
                 cout << "Enter label: ";
@@ -75,7 +76,8 @@ int main()
                 (cin >> rating).get();
                 cout << "Enter color: ";
                 cin.getline(color, 100);
-                arr[i++] = new lacksDMA(color, str, rating);
+                arr[i] = new lacksDMA[1];
+                *arr[i++] = lacksDMA(color, str, rating);
                 break;
             case 3:
                 cout << "Enter label: ";
@@ -84,7 +86,8 @@ int main()
                 (cin >> rating).get();
                 cout << "Enter style: ";
                 cin.getline(style, 100);
-                arr[i++] = new hasDMA(style, str, rating);
+                arr[i] = new hasDMA[1];
+                *arr[i++] = hasDMA(style, str, rating);
                 break;
         }
 
