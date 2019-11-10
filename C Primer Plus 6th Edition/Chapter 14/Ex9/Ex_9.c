@@ -64,25 +64,23 @@ int main(void){
 
     int opt;
     int fl;
-    while(1){
-        fl = printFlights(flights);
-        if(fl == -1){
-            pf = fopen("plane.txt", "wb");
-            for(int i = 0; i < MAXF; ++i){
-                fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
-            }
-            fclose(pf);
-            freeFlights(flights);
-            exit(EXIT_SUCCESS);
-            break;
-        }
-        Flight flt;
+    fl = printFlights(flights);
+    if(fl == -1){
+        pf = fopen("plane.txt", "wb");
         for(int i = 0; i < MAXF; ++i){
-            if(fl == flights[i].flight_id){
-                flt = flights[i];
-            }
+            fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
         }
-
+        fclose(pf);
+        freeFlights(flights);
+        exit(EXIT_SUCCESS);
+    }
+    Flight flt;
+    for(int i = 0; i < MAXF; ++i){
+        if(fl == flights[i].flight_id){
+            flt = flights[i];
+        }
+    }
+    while(1){
         switch(printMenu_getOpt(fl)){
             case 1:
                 printf("\nNumber of empty seats -> %d\n", showNrOfEmptySeats(flt.flight));
@@ -102,16 +100,22 @@ int main(void){
                 deleteSeatAssignment(flt.flight);
                 break;
             case 6:
-                printFlights(flights);
-                // pf = fopen("plane.txt", "wb");
-                // for(int i = 0; i < MAXF; ++i){
-                //     fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
-                // }
-                // // fwrite(plane, sizeof(plane), MAX, pf);
-                // fclose(pf);
-                // freeFlights(flights);
-                // // free(plane);
-                // exit(EXIT_SUCCESS);
+                fl = printFlights(flights);
+                if(fl == -1){
+                    pf = fopen("plane.txt", "wb");
+                    for(int i = 0; i < MAXF; ++i){
+                        fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
+                    }
+                    fclose(pf);
+                    freeFlights(flights);
+                    exit(EXIT_SUCCESS);
+                }
+                Flight flt;
+                for(int i = 0; i < MAXF; ++i){
+                    if(fl == flights[i].flight_id){
+                        flt = flights[i];
+                    }
+                }
                 break;
         }
     }
@@ -187,7 +191,7 @@ int printFlights(Flight *flights){
 }
 
 int printMenu_getOpt(int flight){
-    system("clear");
+    // system("clear");
     const static char arr[][50] = {"To choose a function, enter its letter label:",
                                     "a) Show number of empty seats",
                                     "b) Show list of empty seats",
@@ -202,6 +206,7 @@ int printMenu_getOpt(int flight){
     //     size = 6;
     // }
     // *first = 0;
+    printf("*** FLIGHT %d ***\n", flight);
     for(int i = 0; i < size; ++i){
         printf("%s\n", arr[i]);
     }
