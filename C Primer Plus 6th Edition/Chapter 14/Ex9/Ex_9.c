@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 #define MAX 12
+#define MAXF 4
 
 typedef char String[50];
 typedef struct Seat{
@@ -28,9 +29,12 @@ typedef struct Flight{
     Seat *flight;
 } Flight;
 
+static Flight* createFlights(void);
+static void freeFlights(Flight *flights);
 void initPlane(Seat plane[]);
-int printMenu_getOpt(int *first);
-void init_from_file(Seat plane[], FILE *pf);
+int printFlights(Flight *flights);
+int printMenu_getOpt(int flight);
+void init_from_file(Flight *flights, FILE *pf);
 int showNrOfEmptySeats(const Seat plane[]);
 void showListOfEmptySeats(const Seat plane[]);
 void printListAlphabetically(const Seat plane[]);
@@ -39,55 +43,111 @@ void deleteSeatAssignment(Seat plane[]);
 
 
 int main(void){
-    Seat *plane = (Seat*) malloc(MAX * sizeof(Seat));
-    initPlane(plane);
+    // Flight *flight = (Flight*) malloc(MAXF * sizeof(Flight));
+    // Seat *plane = (Seat*) malloc(MAX * sizeof(Seat));
+    Flight *flights = createFlights();
+    for(int i = 0; i < MAXF; ++i){
+        initPlane(flights[i].flight);
+    }
+    // initPlane(plane);
     int first = 1;
 
     FILE *pf;
     if(!(pf = fopen("plane.txt", "rb"))){
         fprintf(stderr, "Unable to open file [plane.txt]\n");
-        fclose(pf);
+        // fclose(pf);
     } else{
-        init_from_file(plane, pf);
+        init_from_file(flights, pf);
+        // init_from_file(plane, pf);
         fclose(pf);
     }
 
     int opt;
-    while((opt = printMenu_getOpt(&first)) != 6){
-        switch(opt){
+    int fl;
+    while(1){
+        fl = printFlights(flights);
+        if(fl == -1){
+            pf = fopen("plane.txt", "wb");
+            for(int i = 0; i < MAXF; ++i){
+                fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
+            }
+            fclose(pf);
+            freeFlights(flights);
+            exit(EXIT_SUCCESS);
+            break;
+        }
+        Flight flt;
+        for(int i = 0; i < MAXF; ++i){
+            if(fl == flights[i].flight_id){
+                flt = flights[i];
+            }
+        }
+
+        switch(printMenu_getOpt(fl)){
             case 1:
-                printf("\nNumber of empty seats -> %d\n", showNrOfEmptySeats(plane));
+                printf("\nNumber of empty seats -> %d\n", showNrOfEmptySeats(flt.flight));
                 break;
             case 2:
                 printf("\nList of empty seats:\n");
-                showListOfEmptySeats(plane);
+                showListOfEmptySeats(flt.flight);
                 break;
             case 3:
                 printf("\nAlphabetical list of seats:\n");
-                printListAlphabetically(plane);
+                printListAlphabetically(flt.flight);
                 break;
             case 4:
-                assignCustomer(plane);
+                assignCustomer(flt.flight);
                 break;
             case 5:
-                deleteSeatAssignment(plane);
+                deleteSeatAssignment(flt.flight);
                 break;
             case 6:
-                pf = fopen("plane.txt", "wb");
-                fwrite(plane, sizeof(plane), MAX, pf);
-                fclose(pf);
-                free(plane);
-                exit(EXIT_SUCCESS);
+                printFlights(flights);
+                // pf = fopen("plane.txt", "wb");
+                // for(int i = 0; i < MAXF; ++i){
+                //     fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
+                // }
+                // // fwrite(plane, sizeof(plane), MAX, pf);
+                // fclose(pf);
+                // freeFlights(flights);
+                // // free(plane);
+                // exit(EXIT_SUCCESS);
                 break;
         }
     }
 
     pf = fopen("plane.txt", "wb");
-    fwrite(plane, sizeof(Seat), MAX, pf);
+    for(int i = 0; i < MAXF; ++i){
+        fwrite(flights[i].flight, sizeof(Seat), MAX, pf);
+    }
+    // fwrite(plane, sizeof(Seat), MAX, pf);
     fclose(pf);
-    free(plane);
+    freeFlights(flights);
+    // free(plane);
 
     return 0;
+}
+
+static Flight* createFlights(void){
+    Flight *flight = (Flight*) malloc(MAXF * sizeof(Flight));
+    flight[0].flight_id = 102;
+    flight[0].flight = (Seat*) malloc(MAX * sizeof(Seat));
+    flight[1].flight_id = 311;
+    flight[1].flight = (Seat*) malloc(MAX * sizeof(Seat));
+    flight[2].flight_id = 444;
+    flight[2].flight = (Seat*) malloc(MAX * sizeof(Seat));
+    flight[3].flight_id = 519;
+    flight[3].flight = (Seat*) malloc(MAX * sizeof(Seat));
+
+    return flight;
+}
+
+static void freeFlights(Flight *flights){
+    for(int i = 0; i < MAXF; ++i){
+        free(flights[i].flight);
+    }
+    free(flights);
+    flights = NULL;
 }
 
 void initPlane(Seat plane[]){
@@ -99,21 +159,49 @@ void initPlane(Seat plane[]){
     }
 }
 
-int printMenu_getOpt(int *first){
+int printFlights(Flight *flights){
+    system("clear");
+    printf("Choose your Flight:\n");
+    for(int i = 0; i < MAXF; ++i){
+        printf("%d\n", flights[i].flight_id);
+    }
+
+    int fl;
+    printf("\nEnter Flight: ");
+    scanf("%d", &fl);
+    getchar();
+
+    switch(fl){
+        case 102:
+        case 311:
+        case 444:
+        case 519:
+            return fl;
+            break;
+        default:
+            // fprintf(stderr, "Flight does not exist!\n");
+            // exit(EXIT_FAILURE);
+            return -1;
+            break;
+    }
+}
+
+int printMenu_getOpt(int flight){
+    system("clear");
     const static char arr[][50] = {"To choose a function, enter its letter label:",
                                     "a) Show number of empty seats",
                                     "b) Show list of empty seats",
                                     "c) Show alphabetical list of seats",
                                     "d) Assign a customer to a seat assignment",
                                     "e) Delete a seat assignment",
-                                    "f) Quit"};
-    int size;
-    if(*first){
-        size = 7;
-    } else{
-        size = 6;
-    }
-    *first = 0;
+                                    "f) Return"};
+    int size = 7;
+    // if(*first){
+    //     size = 7;
+    // } else{
+    //     size = 6;
+    // }
+    // *first = 0;
     for(int i = 0; i < size; ++i){
         printf("%s\n", arr[i]);
     }
@@ -148,8 +236,10 @@ int printMenu_getOpt(int *first){
     return opt;
 }
 
-void init_from_file(Seat plane[], FILE *pf){
-    fread(plane, sizeof(Seat), MAX, pf);
+void init_from_file(Flight *flights, FILE *pf){
+    for(int i = 0; i < MAXF; ++i){
+        fread(flights[i].flight, sizeof(Seat), MAX, pf);
+    }
 }
 
 int showNrOfEmptySeats(const Seat plane[]){
