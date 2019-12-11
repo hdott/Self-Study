@@ -1,0 +1,54 @@
+﻿@*@{ Layout = "_Layout"; }
+
+    @{
+        ViewData["Title"] = "To Do List";
+    }
+
+
+    @{
+        var tasks = new List<string>
+    { "Buy milk", "Buy eggs", "Buy bread"};
+    }
+
+
+    <h1>Tasks to complete</h1>
+    <ul>
+        @for (var i = 0; i < tasks.Count; ++i)
+        {
+            var task = tasks[i];
+            <li>@(i + 1) - @task</li>
+        }
+    </ul>
+
+    <p>Copyright @DateTime.Now.Year &copy;</p>
+    <p>The sum of 1 and 2 is <i>@(1 + 2)</i></p>*@
+
+@{ 
+    ViewData["Title"] = "Home Page";
+}
+
+@*@section Sidebar{ 
+<p>This is the sidebar content</p>
+}*@
+
+<h1>@ViewData["Title"]</h1>
+<p>This is the home page</p>
+
+@*@model WebApplication2.Models.ToDoItemViewModel
+    <div>
+        @if (Model.IsComplete)
+        {
+            <strong>Well done, you're all done!</strong>
+        }
+        else
+        {
+            <strong>The following tasks remain:</strong>
+            <ul>
+                @foreach (var task in Model.Tasks)
+                {
+                    <li>@task</li>
+                }
+            </ul>
+        }
+    </div>
+    <p>&copy; @DateTime.Now.Year - ToDoList</p>*@
