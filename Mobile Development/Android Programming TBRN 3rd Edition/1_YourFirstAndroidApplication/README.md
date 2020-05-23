@@ -27,6 +27,5 @@ This chapter introduced the following topics:
 - `@ referencing ID`
 - findViewById() `reference to inflated widget`
 - public static Toast makeText()
-- http://www.developer.android.com/tools/publishing/preparing.xhtml
 - AAPT - Android Asset Packaging Tool `compiles layout resources`
 - LayoutInflater class
