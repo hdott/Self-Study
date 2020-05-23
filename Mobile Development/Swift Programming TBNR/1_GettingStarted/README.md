@@ -5,5 +5,5 @@
 This chapter introduced the following topics:
 - Playgrounds
 - import Cocoa
-- var `variable``
+- var `variable`
 - shift + cmd + y -> debug area
