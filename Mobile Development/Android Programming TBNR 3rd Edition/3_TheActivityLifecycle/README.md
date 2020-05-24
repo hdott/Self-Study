@@ -6,7 +6,7 @@
 Learnt about:
 - the 4 states: resumed, paused, stopped, nonexistent
 - lifecycle callbacks
-![activity lifecycle](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.researchgate.net%2Ffigure%2FActivity-lifecycle-diagram_fig1_264500161&psig=AOvVaw0t4LzTfqAyBZvB0EitSXQx&ust=1590442233601000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjvrqK5zekCFQAAAAAdAAAAABAQ)
+![activity lifecycle](https://www.researchgate.net/profile/Chang_Xu2/publication/264500161/figure/fig1/AS:667640737583121@1536189364852/Activity-lifecycle-diagram.png)
 - `android.util.log` class
     - `public static int d(String, String)` debug
 - configuration qualifiers
