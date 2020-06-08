@@ -1,4 +1,4 @@
-### Chapter 2
+### Ch 2 - Program Structure
  - [Looping A Triangle](./LoopingATriangle.js)
  - [FizzBuzz](./FizzBuzz.js)
  - [Chessboard](./Chessboard.js)
