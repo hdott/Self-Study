@@ -14,3 +14,12 @@ for (let i = 0 ; i < 7 ; ++i){
     line += "#";
     console.log(line);
 }
+
+
+//______________________________________
+// 3rd attempt
+let line = "";
+while (line.length < 7) {
+    line += "#";
+    console.log(line);
+}
