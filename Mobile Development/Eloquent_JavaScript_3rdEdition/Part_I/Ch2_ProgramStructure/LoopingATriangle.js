@@ -7,7 +7,7 @@ for (let i = 1 ; i <= 7 ; ++i) {
     console.log(line);
 }
 
-
+//_______________________________________
 // 2nd attempt
 let line = "";
 for (let i = 0 ; i < 7 ; ++i){
